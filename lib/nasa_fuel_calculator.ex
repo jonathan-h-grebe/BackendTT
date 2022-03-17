@@ -1,7 +1,9 @@
 defmodule NasaFuelCalculator do
   @moduledoc """
-  Provides functions to calculate the amount of fuel required for NASA mission,
-  where a mission is a list "itenary items".
+  Provides the function calculate_fuel_for_mission/2,
+  which calculates the amount of fuel required for NASA mission.
+  
+  Missions are considered as lists of "itenary items".
 
   An "itenary items" is considered to be a tuple of the following form:
     {atom specifying "event" type, gravity in units of metres per second squared.}
@@ -15,7 +17,7 @@ defmodule NasaFuelCalculator do
   @spec calculate_fuel_for_mission(non_neg_integer(), list({event_type(), float()})) ::
           non_neg_integer()
   def calculate_fuel_for_mission(ship_mass_kg, itenary) do
-    # All fuel must be taken from the start of the mission,
+    # All fuel must be taken from the outset of the mission,
     # so here we work backwards from the final itenary item, such that the mass of the required fuel
     # from the latter items can be taken into account in the preceeding ones.
     Enum.reverse(itenary)
